@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
     public Transform rayPoint;
     public float fireRate;
     public float range;
-
+    public RaycastHit hit;
     private void OnEnable()
     {
         GameManager.weaponHandler.onGunChanged?.Invoke(this);
@@ -15,7 +15,6 @@ public class Gun : MonoBehaviour
     public virtual void Shoot()
     {
         Debug.Log(gunName + " fired!");
-        RaycastHit hit;
         if (Physics.Raycast(rayPoint.position, rayPoint.forward, out hit, range))
         {
             Debug.Log("Hit: " + hit.collider.name);

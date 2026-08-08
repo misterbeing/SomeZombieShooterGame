@@ -9,7 +9,8 @@ public class gunMfour : Gun
     {
         base.Shoot();
         lineRenderer.SetPosition(0, rayPoint.position);
-        lineRenderer.SetPosition(1, rayPoint.position + rayPoint.forward * range);
+        if(hit.collider == null) lineRenderer.SetPosition(1, rayPoint.position + rayPoint.forward * range);
+        else lineRenderer.SetPosition(1, hit.point);
         particleSystem.Play();
     }
 }
