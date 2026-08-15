@@ -9,7 +9,7 @@ public class PlayerMesh : MonoBehaviour
 
     private void Update()
     {
-        if(Physics.Raycast(transform.position, transform.forward, out raycastResult))
+        if(Physics.Raycast(transform.position, transform.forward, out raycastResult,6))
         {
             if(raycastResult.collider.gameObject.GetComponent<CharacterController>())
             {

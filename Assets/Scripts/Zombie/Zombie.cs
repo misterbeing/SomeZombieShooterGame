@@ -12,6 +12,7 @@ public class Zombie : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI helth;
     [SerializeField] private Canvas healthCanvas;
+    public bool allowMovement;
 
     [SerializeField] private Animator animator;
     public void GotHit()
@@ -45,5 +46,11 @@ public class Zombie : MonoBehaviour
         yield return new WaitForSeconds(2f);
         healthCanvas.GetComponent<CanvasGroup>().alpha = 0f;
         yield return null;
+    }
+
+    public void AttackPlayer(bool val)
+    {
+        allowMovement = !val;
+        animator.SetBool("attack", val);
     }
 }

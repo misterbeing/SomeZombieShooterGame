@@ -23,7 +23,7 @@ public class ZombieSpawner : MonoBehaviour
             NavMeshAgent agent = zombie.GetComponent<NavMeshAgent>();
             if (agent != null)
             {
-                agent.SetDestination(playertransform.position);
+                if(zombie.allowMovement) agent.SetDestination(playertransform.position);
             }
             //zombie.transform.LookAt(playertransform);
         }
