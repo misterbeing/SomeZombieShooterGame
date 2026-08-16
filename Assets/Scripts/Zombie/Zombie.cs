@@ -13,6 +13,7 @@ public class Zombie : MonoBehaviour
     [SerializeField] private TextMeshProUGUI helth;
     [SerializeField] private Canvas healthCanvas;
     public bool allowMovement;
+    public float damageInflicts = 1f;
 
     [SerializeField] private Animator animator;
     public void GotHit()

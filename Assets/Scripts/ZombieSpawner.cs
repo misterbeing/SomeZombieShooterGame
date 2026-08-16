@@ -24,6 +24,7 @@ public class ZombieSpawner : MonoBehaviour
             if (agent != null)
             {
                 if(zombie.allowMovement) agent.SetDestination(playertransform.position);
+                else agent.ResetPath();
             }
             //zombie.transform.LookAt(playertransform);
         }

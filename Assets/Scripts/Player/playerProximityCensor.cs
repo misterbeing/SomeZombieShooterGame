@@ -1,16 +1,20 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class playerProximityCensor : MonoBehaviour
 {
-    [SerializeField] private List<Zombie> zombiesInProximity = new List<Zombie>();
+    public List<Zombie> zombiesInProximity = new List<Zombie>();
+    public int zombieCount => zombiesInProximity.Count;
 
+    public Action<bool,List<Zombie>> zombiesAttacking;
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Zombie>(out var zombie))
         {
             zombiesInProximity.Add(zombie);
             TriggerAttackSequenceFromZombies(zombiesInProximity, true);
+            zombiesAttacking.Invoke(true, zombiesInProximity);
         }
     }
 
@@ -20,6 +24,7 @@ public class playerProximityCensor : MonoBehaviour
         {
             TriggerAttackSequenceFromZombies(zombiesInProximity, false);
             zombiesInProximity.Remove(zombie);
+            zombiesAttacking.Invoke(false, zombiesInProximity);
         }
     }
 
