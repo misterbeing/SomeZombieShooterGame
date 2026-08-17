@@ -15,8 +15,10 @@ public class Zombie : MonoBehaviour
     public bool allowMovement;
     public float damageInflicts = 1f;
 
+    [SerializeField] private GameObject[] zombieMeshes;
+
     [SerializeField] private Animator animator;
-    public void GotHit()
+    public void GotHit(bool val)
     {
         Debug.Log("Zombie got hit!");
         maxHealth -= 10f;

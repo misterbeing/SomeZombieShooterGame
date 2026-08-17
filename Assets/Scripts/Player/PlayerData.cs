@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
-    public float playerHealth;
+    public float playerTotalHealth,playerCurrenthealth;
     [SerializeField] private playerProximityCensor playerProximityCensor;
     public List<float> totaDamageInflicts;
     [SerializeField] private float totalDamageimflicted;
@@ -19,33 +20,29 @@ public class PlayerData : MonoBehaviour
     {
         playerProximityCensor.zombiesAttacking -= GetAttackingZombiesDamage;
     }
-    public void GetAttackingZombiesDamage(bool value, List<Zombie> zombies)
+    public void GetAttackingZombiesDamage(bool value, List<float> zombies)
     {
         if (!value)
         {
             totaDamageInflicts.Clear();
-            //return;
+            totalDamageimflicted = 0;
         }
-        foreach (var zombie in zombies)
-        {
-            totaDamageInflicts.Add(zombie.damageInflicts);
-            float totalDamage = 0;
-            foreach (var damage in totaDamageInflicts)
-            {
-                totalDamage += damage;
-                totalDamageimflicted = totalDamage;
-                StartCoroutine(StartLosingHealth(value, totalDamage));
-            }
+        totaDamageInflicts = zombies;
+        totalDamageimflicted = zombies.Sum();
 
-        }
+        if(value)StartCoroutine(StartLosingHealth(value, totalDamageimflicted));
+        if(!value) StopAllCoroutines();
     }
 
     public IEnumerator StartLosingHealth(bool value, float loseHealthValue)
     {
         while (value)
         {
-            playerHealth -= loseHealthValue * playerProximityCensor.zombieCount;
-            yield return new WaitForSeconds(1f);
+            playerCurrenthealth -= loseHealthValue ;
+            GameManager.onUpdateHealth?.Invoke(playerCurrenthealth,playerTotalHealth);
+            yield return new WaitForSeconds(2f);
         }
+        Debug.Log("losing health: " + value + " " + value);
+        //StopCoroutine(StartLosingHealth(value, loseHealthValue));
     }
 }

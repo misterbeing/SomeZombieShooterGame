@@ -22,7 +22,7 @@ public class Gun : MonoBehaviour
             Zombie zombie = hit.collider.GetComponent<Zombie>();
             if (zombie != null)
             {
-                zombie.GotHit();
+                zombie.GotHit(true);
             }
         }
     }
