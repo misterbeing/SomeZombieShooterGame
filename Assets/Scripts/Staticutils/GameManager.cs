@@ -10,6 +10,8 @@ public static class GameManager
 
     public static Action<Zombie> onZombieEnteringPlayersView;
     public static Action<Zombie> onZombieExitingPlayersView;
+    public static Action onAllZombiesDead;
+
 
     public static Action<float, float> onUpdateHealth;
 }

@@ -447,6 +447,7 @@ MonoBehaviour:
   healthCanvas: {fileID: 6228460099973073386}
   allowMovement: 1
   damageInflicts: 1
+  experiencePoints: 10
   zombieMeshes:
   - {fileID: 7875025324543122896}
   animator: {fileID: 4313181091603191876}

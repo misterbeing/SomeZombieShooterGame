@@ -14,15 +14,22 @@ public class Zombie : MonoBehaviour
     [SerializeField] private Canvas healthCanvas;
     public bool allowMovement;
     public float damageInflicts = 1f;
+    public float experiencePoints = 10f;
 
     [SerializeField] private GameObject[] zombieMeshes;
 
     [SerializeField] private Animator animator;
+    private float maximumHealth;
+
+    private void OnEnable()
+    {
+        maximumHealth = maxHealth;
+    }
     public void GotHit(bool val)
     {
         Debug.Log("Zombie got hit!");
         maxHealth -= 10f;
-        healthBar.fillAmount = maxHealth / 100f;
+        healthBar.fillAmount = maxHealth / maximumHealth;
         helth.text = maxHealth.ToString();
         StartCoroutine(ShowHideCanvas());
         if (maxHealth <= 0)
@@ -37,6 +44,7 @@ public class Zombie : MonoBehaviour
         GameManager.zombieSpawner.RemoveZombie(this);
         GameManager.onZombieExitingPlayersView?.Invoke(this);
         agent.enabled = false;
+        this.GetComponent<Collider>().enabled = false;
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(5f);
         Destroy(gameObject);
