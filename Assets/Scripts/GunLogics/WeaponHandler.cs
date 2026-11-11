@@ -7,9 +7,12 @@ public class WeaponHandler : MonoBehaviour
 
     public Action<Gun> onGunChanged;
 
-    private void OnEnable()
+    private void Awake()
     {
         GameManager.weaponHandler = this;
+    }
+    private void OnEnable()
+    { 
         onGunChanged += ChangeGun;
     }
 

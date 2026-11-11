@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
         MoveInput();
         //LookInput();
         FireInput();
+        SecondaryFireInput();
     }
 
     public void MoveInput()
@@ -49,6 +50,16 @@ public class InputManager : MonoBehaviour
         {
             GameManager.weaponHandler.currentGun?.Shoot();
             Debug.Log("Firing gun: " + GameManager.weaponHandler.currentGun?.gunName);
+        }
+    }
+
+    public void SecondaryFireInput()
+    {
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            Debug.Log("Secondary fire input detected.");
+            // Implement secondary fire logic here
+            GameManager.grenadelauncher.LaunchGrenade();
         }
     }
         

@@ -13,6 +13,9 @@ public class FPSCalculator : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerHealthCounter;
 
     [SerializeField] private Image healthmeter;
+    [SerializeField] private Image GrenadeCounter;
+    [SerializeField] private float val;
+ 
 
 
     private void Start()
@@ -23,6 +26,7 @@ public class FPSCalculator : MonoBehaviour
     private void OnEnable()
     {
         GameManager.onUpdateHealth += UpdateHealthMeter;
+        GameManager.grenadeRelaodTime = GetGrenadeLaunchTime;
     }
 
     private void OnDisable()
@@ -46,6 +50,11 @@ public class FPSCalculator : MonoBehaviour
         }
     }
 
+    public void GetGrenadeLaunchTime(float _val)
+    {
+        val = _val;
+        GrenadeCounter.fillAmount = val;
+    }
     public void UpdateHealthMeter(float _currentHealth, float _totalHealth)
     {
         playerHealthCounter.text = $"{_currentHealth.ToString()}/{_totalHealth.ToString()}";

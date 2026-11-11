@@ -12,6 +12,7 @@ public class ZombieSpawner : MonoBehaviour
     public int spawnCount;
     public float spawnInterval;
     public int zombieSpawnlevel;
+    [SerializeField] private int spawnLevelLimit;
 
     private void OnEnable()
     {
@@ -92,7 +93,15 @@ public class ZombieSpawner : MonoBehaviour
         // If we crossed one or more multiples of 20, increase zombieSpawnlevel accordingly.
         if (newThresholds > previousThresholds)
         {
-            zombieSpawnlevel += (newThresholds - previousThresholds);
+            if (zombieSpawnlevel < spawnLevelLimit)
+            {
+                zombieSpawnlevel += (newThresholds - previousThresholds);
+            }
+
+            else
+            {
+                zombieSpawnlevel = spawnLevelLimit;
+            }
         }
 
         StartCoroutine(SpawnZombies());

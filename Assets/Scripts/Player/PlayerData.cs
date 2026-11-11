@@ -43,6 +43,6 @@ public class PlayerData : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
         Debug.Log("losing health: " + value + " " + value);
-        //StopCoroutine(StartLosingHealth(value, loseHealthValue));
+        StopCoroutine(StartLosingHealth(value, loseHealthValue));
     }
 }

@@ -25,10 +25,10 @@ public class Zombie : MonoBehaviour
     {
         maximumHealth = maxHealth;
     }
-    public void GotHit(bool val)
+    public void GotHit(bool val,float damage)
     {
         Debug.Log("Zombie got hit!");
-        maxHealth -= 10f;
+        maxHealth -= damage;
         healthBar.fillAmount = maxHealth / maximumHealth;
         helth.text = maxHealth.ToString();
         StartCoroutine(ShowHideCanvas());
