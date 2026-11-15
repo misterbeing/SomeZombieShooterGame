@@ -18,4 +18,14 @@ public static class GameManager
     public static Action<float, float> onUpdateHealth;
 
     public static Action<float> grenadeRelaodTime;
+
+    public static Action<Coin> onCoinCollected;
+
+}
+
+public enum coinType
+{
+    Bronze,
+    Silver,
+    Gold
 }

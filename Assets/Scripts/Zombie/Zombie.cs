@@ -20,6 +20,7 @@ public class Zombie : MonoBehaviour
 
     [SerializeField] private Animator animator;
     private float maximumHealth;
+    [SerializeField] private ConDropper coinDropper;
 
     private void OnEnable()
     {
@@ -46,6 +47,7 @@ public class Zombie : MonoBehaviour
         agent.enabled = false;
         this.GetComponent<Collider>().enabled = false;
         animator.SetTrigger("Die");
+        if (coinDropper != null) { coinDropper.DropCoin(); } //need to modify this to drop coins based on zombie type
         yield return new WaitForSeconds(5f);
         Destroy(gameObject);
         yield return null;

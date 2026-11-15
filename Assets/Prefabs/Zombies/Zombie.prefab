@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 6458259165831537846}
   - component: {fileID: 5076174708831854338}
   - component: {fileID: -6801131247934692202}
+  - component: {fileID: 1367918378783949381}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Enemy
@@ -451,6 +452,21 @@ MonoBehaviour:
   zombieMeshes:
   - {fileID: 7875025324543122896}
   animator: {fileID: 4313181091603191876}
+  coinDropper: {fileID: 1367918378783949381}
+--- !u!114 &1367918378783949381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6353793253582944931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5bcea492de3e742892d5fafda70034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConDropper
+  coinPrefab: {fileID: 2798763876466358610, guid: b64f1d49f7cd53d4bb4669a9dedff10c, type: 3}
+  dropCount: 3
 --- !u!1 &8183184743930097486
 GameObject:
   m_ObjectHideFlags: 0
