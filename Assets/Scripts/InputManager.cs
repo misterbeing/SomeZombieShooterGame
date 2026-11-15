@@ -1,25 +1,33 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using zombieGame;
 
 public class InputManager : MonoBehaviour
 {
     public InputActionProperty moveInput;
     public InputActionProperty mousePosition;
     [SerializeField]private CharacterControllerScript characterController;
+    private PlayerInputAction playerinput;
 
     private void OnEnable()
     {
         characterController = GameManager.characterController;
         moveInput.action.Enable();
-    }
-    private void OnDisable() => moveInput.action.Disable();
+        playerinput = new PlayerInputAction();
 
+        playerinput.Enable();
+    }
+    private void OnDisable()
+    {
+        moveInput.action.Disable();
+        playerinput.Disable();
+    }
     private void Update()
     {
         MoveInput();
         //LookInput();
-        FireInput();
-        SecondaryFireInput();
+        if (playerinput.PlayerMovement.PrimaryFire.WasPressedThisFrame()) FireInput();
+        if (Mouse.current.rightButton.wasPressedThisFrame) SecondaryFireInput();
     }
 
     public void MoveInput()
@@ -46,21 +54,15 @@ public class InputManager : MonoBehaviour
 
     public void FireInput()
     {
-        if(Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            GameManager.weaponHandler.currentGun?.Shoot();
-            Debug.Log("Firing gun: " + GameManager.weaponHandler.currentGun?.gunName);
-        }
+       GameManager.weaponHandler.currentGun?.Shoot();
+       Debug.Log("Firing gun: " + GameManager.weaponHandler.currentGun?.gunName);
     }
 
     public void SecondaryFireInput()
     {
-        if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            Debug.Log("Secondary fire input detected.");
-            // Implement secondary fire logic here
-            GameManager.grenadelauncher.LaunchGrenade();
-        }
+       Debug.Log("Secondary fire input detected.");
+       // Implement secondary fire logic here
+       GameManager.grenadelauncher.LaunchGrenade();
     }
         
 }
